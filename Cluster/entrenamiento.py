@@ -32,7 +32,7 @@ cv2.destroyAllWindows()
 
 # Entrenar un clasificador SVM con los embeddings de FaceNet
 from sklearn import svm
-clf = svm.SVC(gamma='scale')
+clf = svm.SVC(gamma='scale', probability=True)
 print("Entrenando...")
 clf.fit(facesData, np.array(labels))
 
