@@ -2,7 +2,7 @@ import cv2
 import os
 import numpy as np
 
-dataPath = r'G:\PROYECTO CONFIDENCIAL\Red Neuronal OpenCV\Data2'
+dataPath = r'G:\PROYECTO CONFIDENCIAL\Red Neuronal OpenCV\Data'
 peopleList = os.listdir(dataPath)
 print('Lista de Personas: ', peopleList)
 

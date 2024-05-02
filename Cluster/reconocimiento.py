@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pickle
 
-dataPath = r'G:\PROYECTO CONFIDENCIAL\Red Neuronal OpenCV\Data2'
+dataPath = r'G:\PROYECTO CONFIDENCIAL\Red Neuronal OpenCV\Data'
 imagePaths = os.listdir(dataPath)
 print('imagePaths', imagePaths)
 

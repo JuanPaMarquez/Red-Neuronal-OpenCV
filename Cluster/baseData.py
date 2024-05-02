@@ -4,7 +4,7 @@ import numpy as np
 import imutils
 
 personName = 'Samuel Celis'
-dataPath = r'G:\PROYECTO CONFIDENCIAL\Red Neuronal OpenCV\Data2'
+dataPath = r'G:\PROYECTO CONFIDENCIAL\Red Neuronal OpenCV\Data'
 personPath = dataPath + '/' + personName
 
 # Cargar el modelo pre-entrenado de FaceNet
