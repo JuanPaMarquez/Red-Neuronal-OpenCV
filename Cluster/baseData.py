@@ -3,7 +3,7 @@ import os
 import numpy as np
 import imutils
 
-personName = 'Samuel Celis'
+personName = 'Juan Marquez'
 dataPath = r'G:\PROYECTO CONFIDENCIAL\Red Neuronal OpenCV\Data'
 personPath = dataPath + '/' + personName
 
@@ -40,6 +40,7 @@ while True:
         vec = model.forward()
         np.save(personPath + '/rostro_{}.npy'.format(count), vec)
         count = count + 1
+        print(count)
 
     cv2.imshow('frame', frame)
 
