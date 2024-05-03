@@ -3,7 +3,7 @@ import os
 import numpy as np
 import imutils
 
-personName = 'Juan Marquez'
+personName = 'Junior Silva'
 dataPath = r'G:\PROYECTO CONFIDENCIAL\Red Neuronal OpenCV\Data'
 personPath = dataPath + '/' + personName
 
