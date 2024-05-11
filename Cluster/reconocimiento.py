@@ -3,7 +3,14 @@ import os
 import numpy as np
 import pickle
 
-dataPath = r'G:\PROYECTO CONFIDENCIAL\Red Neuronal OpenCV\Data'
+# Obtiene la ruta del directorio actual del script
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
+# Sube un nivel en la estructura de directorios
+project_dir = os.path.dirname(current_dir)
+
+# Une la ruta del directorio del proyecto con la carpeta 'Data'
+dataPath = os.path.join(project_dir, 'Data')
 imagePaths = os.listdir(dataPath)
 print('imagePaths', imagePaths)
 

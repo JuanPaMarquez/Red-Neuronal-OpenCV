@@ -1,8 +1,17 @@
 import cv2
 import os
 import numpy as np
+from sklearn import svm
+import pickle
 
-dataPath = r'G:\PROYECTO CONFIDENCIAL\Red Neuronal OpenCV\Data'
+# Obtiene la ruta del directorio actual del script
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
+# Sube un nivel en la estructura de directorios
+project_dir = os.path.dirname(current_dir)
+
+# Une la ruta del directorio del proyecto con la carpeta 'Data'
+dataPath = os.path.join(project_dir, 'Data')
 peopleList = os.listdir(dataPath)
 print('Lista de Personas: ', peopleList)
 
@@ -20,24 +29,17 @@ for nameDir in peopleList:
 
         vec = np.load(personPath + '/' + fileName)
         facesData.append(vec.flatten())
-
-        #########################################################
-        image = vec.reshape((16, 8))
-        cv2.imshow('image', image)
-        cv2.waitKey(10)
-        #########################################################
+        
     label = label + 1
 
 cv2.destroyAllWindows()
 
 # Entrenar un clasificador SVM con los embeddings de FaceNet
-from sklearn import svm
 clf = svm.SVC(gamma='scale', probability=True)
 print("Entrenando...")
 clf.fit(facesData, np.array(labels))
 
 # Guardar el modelo entrenado
-import pickle
-with open('ModeloFaceFrontalData2024.pkl', 'wb') as f:
+with open('Models/ModeloFaceFrontalData2024.pkl', 'wb') as f:
     pickle.dump(clf, f)
 print('Modelo Guardado')

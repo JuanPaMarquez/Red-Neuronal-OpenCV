@@ -3,8 +3,15 @@ import os
 import numpy as np
 import imutils
 
-personName = 'Junior Silva'
-dataPath = r'G:\PROYECTO CONFIDENCIAL\Red Neuronal OpenCV\Data'
+personName = 'Juan Marquez'
+# Obtiene la ruta del directorio actual del script
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
+# Sube un nivel en la estructura de directorios
+project_dir = os.path.dirname(current_dir)
+
+# Une la ruta del directorio del proyecto con la carpeta 'Data'
+dataPath = os.path.join(project_dir, 'Data')
 personPath = dataPath + '/' + personName
 
 # Cargar el modelo pre-entrenado de FaceNet
