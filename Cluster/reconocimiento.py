@@ -11,6 +11,7 @@ project_dir = os.path.dirname(current_dir)
 
 # Une la ruta del directorio del proyecto con la carpeta 'Data'
 dataPath = os.path.join(project_dir, 'Data')
+
 imagePaths = os.listdir(dataPath)
 print('imagePaths', imagePaths)
 
