@@ -50,11 +50,11 @@ def capture_and_save(personName):
             count = count + 1
             print(count)
 
-        cv2.imshow('frame', frame)
+        # cv2.imshow('frame', frame)  # <- Elimina esta línea
 
         k = cv2.waitKey(1)
         if k == 27 or count >= 300:
             break
 
     cap.release()
-    cv2.destroyAllWindows()
+    # cv2.destroyAllWindows()  # <- Elimina esta línea
