@@ -2,40 +2,30 @@ import cv2
 import os
 import numpy as np
 import imutils
+from PyQt6 import QtCore, QtGui
 
-def capture_and_save(personName):
-    # Obtiene la ruta del directorio actual del script
+def capture_and_save(personName, cameraLabel, model, progressBar):
     current_dir = os.path.dirname(os.path.realpath(__file__))
-
-    # Sube un nivel en la estructura de directorios
     project_dir = os.path.dirname(current_dir)
-
-    # Une la ruta del directorio del proyecto con la carpeta 'Data'
     dataPath = os.path.join(project_dir, 'Data')
-
-    personPath = dataPath + '/' + personName
-
-    # Cargar el modelo pre-entrenado de FaceNet
-    model = cv2.dnn.readNetFromTorch('openface.nn4.small2.v1.t7')
+    personPath = os.path.join(dataPath, personName)
 
     if not os.path.exists(personPath):
-        print('Carpeta Creada: ', personPath)
         os.makedirs(personPath)
 
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-
     count = 0
+    total_images = 300
 
-    while True:
+    while count < total_images:
         ret, frame = cap.read()
-        if ret == False:
+        if not ret:
             break
 
         frame = imutils.resize(frame, width=320)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         auxFrame = frame.copy()
 
-        # Detectar rostros en la imagen
         face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
         faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
 
@@ -46,15 +36,19 @@ def capture_and_save(personName):
             rostro_blob = cv2.dnn.blobFromImage(rostro, 1.0/255, (96, 96), (0, 0, 0), swapRB=True, crop=False)
             model.setInput(rostro_blob)
             vec = model.forward()
-            np.save(personPath + '/rostro_{}.npy'.format(count), vec)
-            count = count + 1
-            print(count)
+            np.save(os.path.join(personPath, 'rostro_{}.npy'.format(count)), vec)
+            count += 1
 
-        # cv2.imshow('frame', frame)  # <- Elimina esta línea
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        qt_image = QtGui.QImage(image.data, image.shape[1], image.shape[0], QtGui.QImage.Format.Format_RGB888)
+        cameraLabel.setPixmap(QtGui.QPixmap.fromImage(qt_image))
+        QtCore.QCoreApplication.processEvents()
 
-        k = cv2.waitKey(1)
-        if k == 27 or count >= 300:
+        progressBar.setValue(int((count / total_images) * 100))
+
+        if cv2.waitKey(1) & 0xFF == 27:
             break
 
     cap.release()
-    # cv2.destroyAllWindows()  # <- Elimina esta línea
+    cv2.destroyAllWindows()
+    progressBar.setValue(0)
