@@ -2,12 +2,14 @@ import pickle
 import mysql.connector
 from mysql.connector import Error
 
+# ! Obligatorio 
 # Carga los datos del archivo
 with open('Models/ModeloFaceFrontalData2024.pkl', 'rb') as f:
     data = pickle.load(f)
 
 # Serializa los datos
 pickled_data = pickle.dumps(data)
+# ! Lo de arriba
 
 try:
     cnx = mysql.connector.connect(user='root', password='',

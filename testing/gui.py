@@ -33,6 +33,7 @@ class MainWindow(QtWidgets.QMainWindow):
         
         self.captureButton.clicked.connect(self.capture)
         self.trainButton.clicked.connect(self.train)
+        
         self.recognizeButton.clicked.connect(self.start_recognition)
         self.identifyButton.clicked.connect(self.identify_person)
         
